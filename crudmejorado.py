@@ -193,7 +193,7 @@ Button(ventana, text="Agregar alumno", command=agregar_alumno).grid(row=0, colum
 Button(ventana, text="Actualizar alumno", command=actualizar_alumno).grid(row=1, column=2, padx=5, pady=5)
 Button(ventana, text="Eliminar alumno", command=eliminar_alumno).grid(row=2, column=2, padx=5, pady=5)
 
-# Crear la tabla para mostrar los alumnos
+# Crear la tabla para mostrar los alumnosss
 tabla_alumnos = Frame(ventana)
 tabla_alumnos.grid(row=4, column=0, columnspan=3, padx=5, pady=5)
 
