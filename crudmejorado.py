@@ -85,22 +85,23 @@ def agregar_alumno():
     if not nombre or not edad or not email:
         messagebox.showerror("Error al agregar el alumno", "Por favor ingrese todos los datos del alumno")
         return
-
+    
+    #Esta parte del código es la que agregamos
     # Validar que el nombre solo contenga letras y espacios en blanco
     if not re.match("^[a-zA-Z ]*$", nombre):
         messagebox.showerror("Error al agregar el alumno", "El nombre solo debe contener letras y espacios en blanco")
         return
 
-    # Validar que la edad sea un número
+    # Validar que la edad sea un número 
     try:
         int(edad)
     except ValueError:
-        messagebox.showerror("Error al agregar el alumno", "La edad debe ser un número")
+        messagebox.showerror("Error al agregar el alumno", "La edad debe ser un número obligatoriamente")
         return
 
-    # Validar que el correo electrónico sea válido
+    # Validar que el correo electrónico este correcto
     if not re.match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
-        messagebox.showerror("Error al agregar el alumno", "El correo electrónico no es válido")
+        messagebox.showerror("Error al agregar el alumno", "El correo electrónico no es válido uso de @ Obligatorio")
         return
 
     # Agregar el nuevo alumno
