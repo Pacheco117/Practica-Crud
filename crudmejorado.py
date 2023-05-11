@@ -101,7 +101,7 @@ def agregar_alumno():
 
     # Validar que el correo electrónico este correcto
     if not re.match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
-        messagebox.showerror("Error al agregar el alumno", "El correo electrónico no es válido uso de @ Obligatorio")
+        messagebox.showerror("Error al agregar el alumno", "El correo electrónico no es válido uso de @ Obligatorio y de .com")
         return
 
     # Agregar el nuevo alumno
