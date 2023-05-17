@@ -1,8 +1,7 @@
-from tkinter import *
-from tkinter import messagebox
+from tkinter import *  
 import mysql.connector
+from tkinter import messagebox 
 import re 
-
 
 # Conectar a la base de datos
 try:
@@ -15,7 +14,6 @@ try:
 except mysql.connector.Error as e:
     messagebox.showerror("Error de conexión", f"No se pudo conectar a la base de datos: {e}")
     exit()
-
 
 # Crear la tabla de alumnos si no existe
 cursor = db.cursor()
@@ -37,7 +35,6 @@ def agregar_alumnoDB(nombre, edad, email):
         messagebox.showerror("Error al agregar el alumno", f"No se pudo agregar el alumno: {error}")
     finally:
         cursor.close()
-
 
 # Función para actualizar un alumno existente en la base de datos
 def actualizar_alumnoDB(id, nombre, edad, email):
@@ -69,10 +66,10 @@ def mostrar_alumnos():
         edad = alumno[2]
         email = alumno[3]
 
-        Label(tabla_alumnos, text=id).grid(row=i, column=0)
-        Label(tabla_alumnos, text=nombre).grid(row=i, column=1)
-        Label(tabla_alumnos, text=edad).grid(row=i, column=2)
-        Label(tabla_alumnos, text=email).grid(row=i, column=3)
+        Label(tabla_alumnos, font="Arial 12", text=id).grid(row=5, column=1, padx=100, pady=30)
+        Label(tabla_alumnos, font="Arial 12", text=nombre).grid(row=5, column=2, padx=30, pady=30)
+        Label(tabla_alumnos, font="Arial 12", text=edad).grid(row=5, column=3, padx=50, pady=30)
+        Label(tabla_alumnos, font="Arial 12", text=email).grid(row=5, column=4, padx=30, pady=30)
 
 # Función para agregar un nuevo alumno
 def agregar_alumno():
@@ -101,7 +98,7 @@ def agregar_alumno():
 
     # Validar que el correo electrónico este correcto
     if not re.match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
-        messagebox.showerror("Error al agregar el alumno", "El correo electrónico no es válido uso de @ Obligatorio y de .com")
+        messagebox.showerror("Error al agregar el alumno", "El correo electrónico no es válido uso de @ Obligatorio")
         return
 
     # Agregar el nuevo alumno
@@ -140,7 +137,6 @@ def actualizar_alumno():
     # Mostrar la lista actualizada de alumnos
     mostrar_alumnos()
 
-
 # Función para eliminar un alumno existente
 def eliminar_alumno():
     # Obtener el ID del alumno a eliminar
@@ -167,36 +163,46 @@ def eliminar_alumno():
         # Mostrar la lista actualizada de alumnos
         mostrar_alumnos()
 
-
 # Crear la ventana principal
 ventana = Tk()
 ventana.title("Ejemplo CRUD con Python y MySQL")
 
+#tamaño de la ventana
+ancho_ventana=780   
+alto_ventana=450
+x_ventana=ventana.winfo_screenwidth()//2-ancho_ventana//2
+y_ventana=ventana.winfo_screenheight()//2-alto_ventana//2
+posicion=str(ancho_ventana)+"x"+str(alto_ventana)+"+"+str(x_ventana)+"+"+str(y_ventana)
+ventana.geometry(posicion)
+ventana.resizable(0,0)
+
+Label(ventana, font="Arial 12", text="CRUD:", padx=100, pady=50).grid(row=0, column=1, padx=0, pady=0)
+
 # Crear los campos de entrada para los datos del alumno
-Label(ventana, text="Id:").grid(row=0, column=0, padx=5, pady=5)
-entrada_id = Entry(ventana)
-entrada_id.grid(row=0, column=1, padx=5, pady=5)
+Label(ventana, font="Arial 12", text="Id:", padx=100).grid(row=1, column=0, padx=5, pady=5)
+entrada_id = Entry(ventana, font="Arial 12", justify=CENTER, width="20")
+entrada_id.grid(row=1, column=1, padx=5, pady=5)
 
-Label(ventana, text="Nombre:").grid(row=1, column=0, padx=5, pady=5)
-entrada_nombre = Entry(ventana)
-entrada_nombre.grid(row=1, column=1, padx=5, pady=5)
+Label(ventana, font="Arial 12", text="Nombre:").grid(row=2, column=0, padx=5, pady=5)
+entrada_nombre = Entry(ventana, font="Arial 12", justify=CENTER, width="20")
+entrada_nombre.grid(row=2, column=1, padx=5, pady=5)
 
-Label(ventana, text="Edad:").grid(row=2, column=0, padx=5, pady=5)
-entrada_edad = Entry(ventana)
-entrada_edad.grid(row=2, column=1, padx=5, pady=5)
+Label(ventana, font="Arial 12", text="Edad:").grid(row=3, column=0, padx=5, pady=5)
+entrada_edad = Entry(ventana, font="Arial 12", justify=CENTER, width="20")
+entrada_edad.grid(row=3, column=1, padx=5, pady=5)
 
-Label(ventana, text="Email:").grid(row=3, column=0, padx=5, pady=5)
-entrada_email = Entry(ventana)
-entrada_email.grid(row=3, column=1, padx=5, pady=5)
+Label(ventana, font="Arial 12", text="Email:").grid(row=4, column=0, padx=5, pady=5)
+entrada_email = Entry(ventana, font="Arial 12", justify=CENTER, width="20")
+entrada_email.grid(row=4, column=1, padx=5, pady=5)
 
 # Crear los botones para agregar, actualizar y eliminar alumnos
-Button(ventana, text="Agregar alumno", command=agregar_alumno).grid(row=0, column=2, padx=5, pady=5)
-Button(ventana, text="Actualizar alumno", command=actualizar_alumno).grid(row=1, column=2, padx=5, pady=5)
-Button(ventana, text="Eliminar alumno", command=eliminar_alumno).grid(row=2, column=2, padx=5, pady=5)
+Button(ventana, font="Arial 12", bg="#00FF00", fg="#FFF", width="20", text="Agregar alumno", command=agregar_alumno).grid(row=1, column=2, padx=5, pady=5)
+Button(ventana, font="Arial 12", bg="#002D4F", fg="#FFF", width="20", text="Actualizar alumno", command=actualizar_alumno).grid(row=2, column=2, padx=5, pady=5)
+Button(ventana, font="Arial 12", bg="#FF0000", fg="#FFF", width="20",  text="Eliminar alumno", command=eliminar_alumno).grid(row=3, column=2, padx=5, pady=5)
 
 # Crear la tabla para mostrar los alumnosss
 tabla_alumnos = Frame(ventana)
-tabla_alumnos.grid(row=4, column=0, columnspan=3, padx=5, pady=5)
+tabla_alumnos.grid(row=5, column=0, columnspan=3, padx=5, pady=5)
 
 Label(tabla_alumnos, text="ID").grid(row=0, column=0)
 Label(tabla_alumnos, text="Nombre").grid(row=0, column=1)
